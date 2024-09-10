@@ -1,0 +1,86 @@
+# import and variables
+alphabet1 = ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+             "n","o","p","r","s","t","u","v","w","x","y","z"]
+alphabet2 = ["a","b","c","d","e","f","g","h","i","j","k","l","m",
+             "n","o","p","r","s","t","u","v","w","x","y","z"]
+beta1 = []
+beta2 = []
+answer = []
+row1 = 0
+row2 = 0
+col1 = 0
+col2 = 0
+
+# cypher squares
+kword1 = [*input("Enter your first keyword:\n")]
+kword2 = [*input("Enter your second keyword:\n")]
+
+for letter in kword1:
+  if letter in alphabet1:
+    beta1.append(letter)
+    alphabet1.remove(letter)
+
+for letter in kword2:
+  if letter in alphabet2:
+    beta2.append(letter)
+    alphabet2.remove(letter)
+
+beta1 = beta1 + alphabet1
+beta2 = beta2 + alphabet2
+
+square1 = []
+square2 = []
+
+for i in range(0,len(beta1),5):
+  square1.append(list(beta1[i:i+5]))
+for i in range(0,len(beta2),5):
+  square2.append(list(beta2[i:i+5]))
+
+# alphabet squares
+alpha1 = [["a","b","c","d","e"],
+          ["f","g","h","i","j"],
+          ["k","l","m","n","o"],
+          ["p","r","s","t","u"],
+          ["v","w","x","y","z"]]
+
+alpha2 = [["a","b","c","d","e"],
+          ["f","g","h","i","j"],
+          ["k","l","m","n","o"],
+          ["p","r","s","t","u"],
+          ["v","w","x","y","z"]]
+
+def print_sqaure(square):
+  for row in square:
+    print(row)
+  print()
+
+print_sqaure(alpha1)
+print_sqaure(square1)
+print_sqaure(alpha2)
+print_sqaure(square2)
+
+# cypher
+word = list(input("Enter your word you want encrypted: "))
+print(word)
+
+if len(word) % 2 !=0:
+  word.append("x")
+
+
+if len(word) % 2 != 0:
+    word.append("x")
+
+for pos in range(0, len(word), 2):
+  for row in range(len(alpha1)):
+    for col in range(len(alpha1[row])):
+      if word[pos] == alpha1[row][col]:
+        row1 = row
+        col1 = col
+      if word[pos + 1] == alpha2[row][col]:
+        row2 = row
+        col2 = col
+
+  answer.append(square1[row1][col2])
+  answer.append(square2[row2][col1])
+
+print("Encrypted word:",(answer))
